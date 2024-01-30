@@ -1,6 +1,8 @@
+import { Loading } from "@/components/auth/loading";
 import { ConvexClientProvider } from "@/providers/convex-client-provider";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Suspense } from "react";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -18,7 +20,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ConvexClientProvider>{children}</ConvexClientProvider>
+        <Suspense fallback={<Loading />}>
+          <ConvexClientProvider>{children}</ConvexClientProvider>
+        </Suspense>
       </body>
     </html>
   );
